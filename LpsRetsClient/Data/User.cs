@@ -1,0 +1,60 @@
+#region LICENSE
+//Copyright (c) 2013 LPS MLS Solutions
+
+//Permission is hereby granted, free of charge, to any person obtaining a copy of
+//this software and associated documentation files (the "Software"), to deal in
+//the Software without restriction, including without limitation the rights to
+//use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+//of the Software, and to permit persons to whom the Software is furnished to do
+//so, subject to the following conditions:
+
+//The above copyright notice and this permission notice shall be included in all
+//copies or substantial portions of the Software.
+
+//THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+//SOFTWARE.
+#endregion
+
+namespace LpsRetsClient.Data
+{
+	public class User
+	{
+		public string Id { get; set; }
+		public string Class { get; set; }
+		public int? Level { get; set; }
+		public string Code { get; set; }
+		
+		public static User Parse(string userValue)
+		{
+			var user = new User();
+			
+			if (!string.IsNullOrEmpty(userValue))
+			{
+				var attributes = userValue.Split(new[] { ',' });
+				if (attributes.Length == 4)
+				{
+					user.Id = attributes[0];
+					user.Class = attributes[2];
+					user.Code = attributes[3];
+					
+					if (!string.IsNullOrEmpty(attributes[1]))
+					{
+						int level = 0;
+						if (int.TryParse(attributes[1], out level))
+						{
+							user.Level = level;
+						}
+					}
+				}
+			}
+			
+			return user;
+		}
+	}
+}
+

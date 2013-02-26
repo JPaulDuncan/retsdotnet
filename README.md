@@ -15,7 +15,7 @@ A .NET client library for RETS.
 * You must be familiar with the RETS standard.  Visit http://www.reso.org/specifications for more information.
 
 # Additional Notes
-* This library was originally created to facilitate testing of the PostObject transaction.  It is not yet complete.
+* This library was originally created to facilitate testing of the PostObject transaction.  Although that transaction is fully implemented, the library is not yet complete.
 
 # Supported Transactions
 * Login

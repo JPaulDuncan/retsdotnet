@@ -15,21 +15,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{401A30
 	EndProjectSection
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 4
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://olaregwcmptf01.corp.lpsvcs.com:8080/tfs/mlsprojects
-		SccProjectUniqueName0 = PostObject\\PostObject.csproj
-		SccProjectName0 = PostObject
-		SccLocalPath0 = PostObject
-		SccLocalPath1 = .
-		SccProjectUniqueName2 = LpsRetsClient\\LpsRetsClient.csproj
-		SccProjectName2 = LpsRetsClient
-		SccLocalPath2 = LpsRetsClient
-		SccProjectUniqueName3 = LpsRetsClient.Tests\\LpsRetsClient.Tests.csproj
-		SccProjectName3 = LpsRetsClient.Tests
-		SccLocalPath3 = LpsRetsClient.Tests
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU

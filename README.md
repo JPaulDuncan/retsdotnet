@@ -2,13 +2,13 @@
 
 A .NET client library for RETS.
 
-# Build
-Get the code.
-
+# Get the code
     git clone git://github.com/lpsmls/retsdotnet.git
 
-Open LpsRetsClient.sln in Visual Studio 2012.
-Build.
+# Build
+* Ensure you have "Allow NuGet to download missing packages during build" enabled.  This can be found under Tools...Options...Package Manager...General.
+* Open LpsRetsClient.sln in Visual Studio 2012.
+* Build.
 
 # Prerequisites for Usage
 * You must have obtained access to a RETS server through an agreement with a MLS.

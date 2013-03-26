@@ -131,11 +131,11 @@ namespace PostObject
 				}
 
 				if (options.Action.Equals("Add", StringComparison.InvariantCultureIgnoreCase))
-					response = session.PostObject(RetsPostObjectParams.ActionAdd(options.ContentType, options.Type, options.Resource, options.ResourceId, options.ObjectId, fileName, fileContents, options.Description, options.Label, options.Accessibility));
+					response = session.PostObject(RetsPostObjectParams.ActionAdd(options.ContentType, options.Type, options.Resource, options.ResourceId, options.ObjectId, fileName, fileContents, options.Description, options.Label, options.Accessibility, options.DelegateId, options.DelegateHash, options.DelegatePassword));
 				else if (options.Action.Equals("Replace", StringComparison.InvariantCultureIgnoreCase))
-					response = session.PostObject(RetsPostObjectParams.ActionReplace(options.ContentType, options.Type, options.Resource, options.ResourceId, options.ObjectId ?? -1, fileName, fileContents, options.Description, options.Label, options.Accessibility));
+					response = session.PostObject(RetsPostObjectParams.ActionReplace(options.ContentType, options.Type, options.Resource, options.ResourceId, options.ObjectId ?? -1, fileName, fileContents, options.Description, options.Label, options.Accessibility, options.DelegateId, options.DelegateHash, options.DelegatePassword));
 				else if (options.Action.Equals("Delete", StringComparison.InvariantCultureIgnoreCase))
-					response = session.PostObject(RetsPostObjectParams.ActionDelete(options.ContentType, options.Type, options.Resource, options.ResourceId, options.ObjectId));
+					response = session.PostObject(RetsPostObjectParams.ActionDelete(options.ContentType, options.Type, options.Resource, options.ResourceId, options.ObjectId, options.DelegateId, options.DelegateHash, options.DelegatePassword));
 				else
 					response = session.PostObject(new RetsPostObjectParams
 					{
@@ -148,7 +148,10 @@ namespace PostObject
 						Resource = options.Resource,
 						ResourceId = options.ResourceId,
 						Type = options.Type,
-						UpdateAction = options.Action
+						UpdateAction = options.Action,
+						DelegateId = options.DelegateId,
+						DelegateHash = options.DelegateHash,
+						DelegatePassword = options.DelegatePassword
 					});
 			}
 			catch (Exception ex)
@@ -181,6 +184,12 @@ namespace PostObject
 
 					if (options.Type.Equals("Document", StringComparison.InvariantCultureIgnoreCase))
 						Guard.That(options.Description).IsTrue(d => !string.IsNullOrWhiteSpace(d), "Description must be provided when type is Document and action is Add or Replace.");
+				}
+
+				if (!string.IsNullOrWhiteSpace(options.DelegateId))
+				{
+					Guard.That(options.DelegateHash).IsTrue(dh => !string.IsNullOrWhiteSpace(dh), "Delegate user hash is required when /did parameter is used.");
+					Guard.That(options.DelegatePassword).IsTrue(dp => !string.IsNullOrWhiteSpace(dp), "Delegate authorization password is required when /did parameter is used.");
 				}
 			}
 			catch (Exception ex)

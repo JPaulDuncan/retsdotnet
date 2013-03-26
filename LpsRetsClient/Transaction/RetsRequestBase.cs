@@ -20,9 +20,12 @@
 //SOFTWARE.
 #endregion
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using LpsRetsClient.Data;
+using LpsRetsClient.Security;
 
 namespace LpsRetsClient.Transaction
 {
@@ -33,6 +36,10 @@ namespace LpsRetsClient.Transaction
 		public virtual byte[] PostBody { get; set; }
 		public Dictionary<string, string> Headers { get; private set; }
 
+		public string DelegateId { get; set; }
+		public string DelegateHash { get; set; }
+		public string DelegatePassword { get; set; }
+
 		public RetsRequestBase()
 		{
 			Headers = new Dictionary<string, string>();
@@ -40,6 +47,25 @@ namespace LpsRetsClient.Transaction
 
 		public virtual void PrepareRequest(HttpWebRequest request)
 		{
+			if (!string.IsNullOrWhiteSpace(DelegateId))
+			{
+				if (!request.Headers.AllKeys.Any(s => s.Equals("RETS-UA-Authorization", StringComparison.InvariantCultureIgnoreCase)))
+					throw new InvalidOperationException("Missing RETS-UA-Authorization header.");
+
+				request.Headers.Add("X-Delegate-ID", DelegateId);
+				string retsUaAuthorization = request.Headers["RETS-UA-Authorization"].Substring(7);
+
+				request.Headers.Add("X-Delegate-Authorization", GetDelegateAuthorization(retsUaAuthorization, DelegatePassword, DelegateHash, DelegateId));
+			}
+		}
+
+		/// <summary>
+		/// ua-digest-response ::= LHEX( MD5( RETS-UA-Authorization ":" DelegatePassword ":" DelegateHash ":" DelegateUserCode))
+		/// </summary>
+		/// <returns></returns>
+		protected string GetDelegateAuthorization(string retsUaAuthorization, string delegatePassword, string delegateHash, string delegateId)
+		{
+			return "Digest " + Crypto.GetMd5(retsUaAuthorization + ":" + delegatePassword + ":" + delegateHash + ":" + delegateId);
 		}
 	}
 }

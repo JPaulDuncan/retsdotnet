@@ -132,7 +132,11 @@ namespace LpsRetsClient
 													PostBody = postObjectParams.FileContents,
 													FileName = postObjectParams.FileName,
 													ContentDescription = postObjectParams.ContentDescription,
-													ContentLabel = postObjectParams.ContentLabel
+													ContentLabel = postObjectParams.ContentLabel,
+													Accessibility = postObjectParams.Accessibility,
+													DelegateId = postObjectParams.DelegateId,
+													DelegateHash = postObjectParams.DelegateHash,
+													DelegatePassword = postObjectParams.DelegatePassword
 						                        };
 
 					response.Parse(request.Post(postObjectRequest));

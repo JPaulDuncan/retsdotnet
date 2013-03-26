@@ -79,5 +79,14 @@ namespace PostObject
 
 		[ArgsMemberSwitch("verbose"), Description("Set for more verbose output.")]
 		public bool Verbose { get; set; }
+
+		[ArgsMemberSwitch("did"), Description("Use this user code for this transaction instead of the login user (requires /da and /dh parameters).")]
+		public string DelegateId { get; set; }
+
+		[ArgsMemberSwitch("dh"), Description("Delegate user hash (required when /did parameter is used).")]
+		public string DelegateHash { get; set; }
+
+		[ArgsMemberSwitch("da"), Description("Delegate authorization password (required when /did parameter is used).")]
+		public string DelegatePassword { get; set; }
 	}
 }

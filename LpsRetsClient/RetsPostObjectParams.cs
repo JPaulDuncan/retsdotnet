@@ -34,10 +34,13 @@ namespace LpsRetsClient
 		public string ContentDescription { get; set; }
 		public string FileName { get; set; }
 		public int? ObjectId { get; set; }
+		public string DelegateId { get; set; }
+		public string DelegateHash { get; set; }
+		public string DelegatePassword { get; set; }
 
 		public byte[] FileContents { get; set; }
 
-		public static RetsPostObjectParams ActionAdd(string contentType, string type, string resource, string resourceId, int? objectId, string fileName, byte[] fileContents, string description = null, string label = null, string accessibility = null)
+		public static RetsPostObjectParams ActionAdd(string contentType, string type, string resource, string resourceId, int? objectId, string fileName, byte[] fileContents, string description = null, string label = null, string accessibility = null, string delegateId = null, string delegateHash = null, string delegatePassword = null)
 		{
 			return new RetsPostObjectParams
 				       {
@@ -51,11 +54,14 @@ namespace LpsRetsClient
 						   Accessibility = accessibility,
 						   ContentLabel = label,
 						   ContentDescription = description,
-						   FileName = fileName
+						   FileName = fileName,
+						   DelegateId = delegateId,
+						   DelegateHash = delegateHash,
+						   DelegatePassword = delegatePassword
 				       };
 		}
 
-		public static RetsPostObjectParams ActionReplace(string contentType, string type, string resource, string resourceId, int objectId, string fileName, byte[] fileContents, string description = null, string label = null, string accessibility = null)
+		public static RetsPostObjectParams ActionReplace(string contentType, string type, string resource, string resourceId, int objectId, string fileName, byte[] fileContents, string description = null, string label = null, string accessibility = null, string delegateId = null, string delegateHash = null, string delegatePassword = null)
 		{
 			return new RetsPostObjectParams
 			{
@@ -69,11 +75,14 @@ namespace LpsRetsClient
 				Accessibility = accessibility,
 				ContentLabel = label,
 				ContentDescription = description,
-				FileName = fileName
+				FileName = fileName,
+				DelegateId = delegateId,
+				DelegateHash = delegateHash,
+				DelegatePassword = delegatePassword
 			};
 		}
 
-		public static RetsPostObjectParams ActionDelete(string contentType, string type, string resource, string resourceId, int? objectId)
+		public static RetsPostObjectParams ActionDelete(string contentType, string type, string resource, string resourceId, int? objectId, string delegateId = null, string delegateHash = null, string delegatePassword = null)
 		{
 			return new RetsPostObjectParams
 			{
@@ -82,7 +91,10 @@ namespace LpsRetsClient
 				Type = type,
 				Resource = resource,
 				ResourceId = resourceId,
-				ObjectId = objectId
+				ObjectId = objectId,
+				DelegateId = delegateId,
+				DelegateHash = delegateHash,
+				DelegatePassword = delegatePassword
 			};
 		}
 	}

@@ -21,6 +21,7 @@
 #endregion
 
 using System;
+using System.Linq;
 using System.Net;
 
 namespace LpsRetsClient.Transaction
@@ -63,6 +64,8 @@ namespace LpsRetsClient.Transaction
 
 			if (Type.Equals("Document", StringComparison.InvariantCultureIgnoreCase))
 				request.Headers.Add("X-FileName", FileName);
+
+			base.PrepareRequest(request);
 		}
 	}
 }

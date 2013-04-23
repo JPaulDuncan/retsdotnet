@@ -43,7 +43,7 @@ var session = RetsSession.Create(
     userAgentAuth, 
     retsVersion);
 
-var loginResponse = Login(options, session);
+var loginResponse = session.Login();
 if (loginResponse.IsSuccessful)
 {
     // Do stuff with session

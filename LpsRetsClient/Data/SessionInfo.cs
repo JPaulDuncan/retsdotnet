@@ -37,6 +37,7 @@ namespace LpsRetsClient.Data
 		public string UserAgentAuth { get; private set; }
 		public string RetsVersion { get; private set; }
 		public string RetsRequestId { get; set; }
+		public AuthenticationMethod AuthMethod { get; private set; }
 		
 		public CookieContainer Cookies { get; set; }
 
@@ -67,7 +68,7 @@ namespace LpsRetsClient.Data
 			}
 		}
 		
-		public static SessionInfo Create(string baseUrl, string loginUrl, int port, string userName, string password, string userAgent, string userAgentAuth, string retsVersion)
+		public static SessionInfo Create(string baseUrl, string loginUrl, int port, string userName, string password, string userAgent, string userAgentAuth, string retsVersion, AuthenticationMethod authMethod)
 		{
 			return new SessionInfo
 			{
@@ -78,7 +79,8 @@ namespace LpsRetsClient.Data
 				Password = password,
 				UserAgent = userAgent,
 				UserAgentAuth = userAgentAuth,
-				RetsVersion = retsVersion
+				RetsVersion = retsVersion,
+				AuthMethod = authMethod
 			};
 		}
 	}

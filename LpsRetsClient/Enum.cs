@@ -48,5 +48,11 @@ namespace LpsRetsClient
 		Replace,
 		Delete
 	}
+
+	public enum AuthenticationMethod
+	{
+		Digest,
+		Basic
+	}
 }
 

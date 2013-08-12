@@ -56,7 +56,16 @@ namespace PostObject
 
 			var uri = new Uri(options.LoginUrl);
 			
-			var session = RetsSession.Create(uri.GetLeftPart(UriPartial.Authority), uri.GetComponents(UriComponents.PathAndQuery, UriFormat.Unescaped), options.Port, options.UserName, password, options.UserAgent, options.UserAgentAuth, options.RetsVersion);
+			var session = RetsSession.Create(
+				uri.GetLeftPart(UriPartial.Authority), 
+				uri.GetComponents(UriComponents.PathAndQuery, UriFormat.Unescaped), 
+				options.Port, 
+				options.UserName, 
+				password, 
+				options.UserAgent, 
+				options.UserAgentAuth, 
+				options.RetsVersion,
+				options.BasicAuth ? AuthenticationMethod.Basic : AuthenticationMethod.Digest);
 
 			var loginResponse = Login(options, session);
 			if (loginResponse.IsSuccessful)

@@ -30,7 +30,7 @@ namespace LpsRetsClient.Tests
 		[TestMethod]
 		public void Login()
 		{
-			var session = RetsSession.Create("http://localhost", "/RETS/FNISRETS.aspx/XXX/login", 80, "xxx", "xxx", "reInsightMobile/1.0", "xxx", "RETS/1.5");
+			var session = RetsSession.Create("http://localhost", "/RETS/FNISRETS.aspx/XXX/login", 80, "xxx", "xxx", "reInsightMobile/1.0", "xxx", "RETS/1.5", AuthenticationMethod.Digest);
 			var loginResponse = session.Login();
 			Assert.IsTrue(loginResponse.IsSuccessful, "Login failed.  " + loginResponse.ReplyText);
 

@@ -88,5 +88,8 @@ namespace PostObject
 
 		[ArgsMemberSwitch("da"), Description("Delegate authorization password (required when /did parameter is used).")]
 		public string DelegatePassword { get; set; }
+
+		[ArgsMemberSwitch("ba"), Description("Set to use basic authentication instead of digest authentication.")]
+		public bool BasicAuth { get; set; }
 	}
 }

@@ -35,8 +35,10 @@ namespace LpsRetsClient.Http
 		{
 			var methodUri = new Uri(retsRequest.MethodUrl);
 			var sessionInfo = retsRequest.Session;
-			
-			var credentials = new CredentialCache {{methodUri, "Digest", new NetworkCredential(sessionInfo.UserName, sessionInfo.Password)}};
+
+			var networkCredential = new NetworkCredential(sessionInfo.UserName, sessionInfo.Password);
+			var authMethod = retsRequest.Session.AuthMethod == AuthenticationMethod.Basic ? "Basic" : "Digest";
+			var credentials = new CredentialCache {{methodUri, authMethod, networkCredential}};
 
 			var request = (HttpWebRequest)WebRequest.Create(methodUri);
 			request.Credentials = credentials;

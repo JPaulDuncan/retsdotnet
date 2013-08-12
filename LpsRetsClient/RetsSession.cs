@@ -38,11 +38,11 @@ namespace LpsRetsClient
 		{
 		}
 		
-		public static RetsSession Create(string baseUrl, string loginUrl, int port, string userName, string password, string userAgent, string userAgentAuth, string retsVersion)
+		public static RetsSession Create(string baseUrl, string loginUrl, int port, string userName, string password, string userAgent, string userAgentAuth, string retsVersion, AuthenticationMethod authMethod)
 		{
 			return new RetsSession
 			{
-				SessionInfo = SessionInfo.Create(baseUrl, loginUrl, port, userName, password, userAgent, userAgentAuth, retsVersion)
+				SessionInfo = SessionInfo.Create(baseUrl, loginUrl, port, userName, password, userAgent, userAgentAuth, retsVersion, authMethod)
 			};
 		}
 		

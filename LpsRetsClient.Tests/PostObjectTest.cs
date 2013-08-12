@@ -39,6 +39,7 @@ namespace LpsRetsClient.Tests
 		private const string UserAgent = "reInsightMobile/1.0";
 		private const string UserAgentAuth = "xxx";
 		private const string RetsVersion = "RETS/1.5";
+		private const AuthenticationMethod AuthMethod = AuthenticationMethod.Digest;
 
 		private RetsSession Session { get; set; }
 		private RetsLoginResponse LoginResponse { get; set; }
@@ -46,7 +47,7 @@ namespace LpsRetsClient.Tests
 		[TestInitialize]
 		public void Initialize()
 		{
-			Session = RetsSession.Create(BaseUrl, LoginUrl, Port, UserName, Password, UserAgent, UserAgentAuth, RetsVersion);
+			Session = RetsSession.Create(BaseUrl, LoginUrl, Port, UserName, Password, UserAgent, UserAgentAuth, RetsVersion, AuthMethod);
 			LoginResponse = Session.Login();
 		}
 

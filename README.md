@@ -41,7 +41,8 @@ var session = RetsSession.Create(
     password, 
     userAgent, 
     userAgentAuth, 
-    retsVersion);
+    retsVersion,
+    AuthenticationMethod.Digest);
 
 var loginResponse = session.Login();
 if (loginResponse.IsSuccessful)

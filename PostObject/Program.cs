@@ -140,9 +140,9 @@ namespace PostObject
 				}
 
 				if (options.Action.Equals("Add", StringComparison.InvariantCultureIgnoreCase))
-					response = session.PostObject(RetsPostObjectParams.ActionAdd(options.ContentType, options.Type, options.Resource, options.ResourceId, options.ObjectId, fileName, fileContents, options.Description, options.Label, options.Accessibility, options.DelegateId, options.DelegateHash, options.DelegatePassword));
+					response = session.PostObject(RetsPostObjectParams.ActionAdd(options.ContentType, options.Type, options.Resource, options.ResourceId, options.ObjectId, fileName, fileContents, description: options.Description, label: options.Label, accessibility: options.Accessibility, documentTypeId: options.DocumentTypeId, delegateId: options.DelegateId, delegateHash: options.DelegateHash, delegatePassword: options.DelegatePassword));
 				else if (options.Action.Equals("Replace", StringComparison.InvariantCultureIgnoreCase))
-					response = session.PostObject(RetsPostObjectParams.ActionReplace(options.ContentType, options.Type, options.Resource, options.ResourceId, options.ObjectId ?? -1, fileName, fileContents, options.Description, options.Label, options.Accessibility, options.DelegateId, options.DelegateHash, options.DelegatePassword));
+					response = session.PostObject(RetsPostObjectParams.ActionReplace(options.ContentType, options.Type, options.Resource, options.ResourceId, options.ObjectId ?? -1, fileName, fileContents, description: options.Description, label: options.Label, accessibility: options.Accessibility, documentTypeId: options.DocumentTypeId, delegateId: options.DelegateId, delegateHash: options.DelegateHash, delegatePassword: options.DelegatePassword));
 				else if (options.Action.Equals("Delete", StringComparison.InvariantCultureIgnoreCase))
 					response = session.PostObject(RetsPostObjectParams.ActionDelete(options.ContentType, options.Type, options.Resource, options.ResourceId, options.ObjectId, options.DelegateId, options.DelegateHash, options.DelegatePassword));
 				else
@@ -160,7 +160,8 @@ namespace PostObject
 						UpdateAction = options.Action,
 						DelegateId = options.DelegateId,
 						DelegateHash = options.DelegateHash,
-						DelegatePassword = options.DelegatePassword
+						DelegatePassword = options.DelegatePassword,
+						DocumentTypeId = options.DocumentTypeId,
 					});
 			}
 			catch (Exception ex)

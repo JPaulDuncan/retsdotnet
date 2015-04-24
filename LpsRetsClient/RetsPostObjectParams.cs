@@ -39,8 +39,9 @@ namespace LpsRetsClient
 		public string DelegatePassword { get; set; }
 
 		public byte[] FileContents { get; set; }
+		public int? DocumentTypeId { get; set; }
 
-		public static RetsPostObjectParams ActionAdd(string contentType, string type, string resource, string resourceId, int? objectId, string fileName, byte[] fileContents, string description = null, string label = null, string accessibility = null, string delegateId = null, string delegateHash = null, string delegatePassword = null)
+		public static RetsPostObjectParams ActionAdd(string contentType, string type, string resource, string resourceId, int? objectId, string fileName, byte[] fileContents, string description = null, string label = null, string accessibility = null, int? documentTypeId = null, string delegateId = null, string delegateHash = null, string delegatePassword = null)
 		{
 			return new RetsPostObjectParams
 				       {
@@ -57,11 +58,12 @@ namespace LpsRetsClient
 						   FileName = fileName,
 						   DelegateId = delegateId,
 						   DelegateHash = delegateHash,
-						   DelegatePassword = delegatePassword
+						   DelegatePassword = delegatePassword,
+						   DocumentTypeId = documentTypeId,
 				       };
 		}
 
-		public static RetsPostObjectParams ActionReplace(string contentType, string type, string resource, string resourceId, int objectId, string fileName, byte[] fileContents, string description = null, string label = null, string accessibility = null, string delegateId = null, string delegateHash = null, string delegatePassword = null)
+		public static RetsPostObjectParams ActionReplace(string contentType, string type, string resource, string resourceId, int objectId, string fileName, byte[] fileContents, string description = null, string label = null, string accessibility = null, int? documentTypeId = null, string delegateId = null, string delegateHash = null, string delegatePassword = null)
 		{
 			return new RetsPostObjectParams
 			{
@@ -78,7 +80,8 @@ namespace LpsRetsClient
 				FileName = fileName,
 				DelegateId = delegateId,
 				DelegateHash = delegateHash,
-				DelegatePassword = delegatePassword
+				DelegatePassword = delegatePassword,
+				DocumentTypeId = documentTypeId,
 			};
 		}
 

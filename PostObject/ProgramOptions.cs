@@ -53,6 +53,9 @@ namespace PostObject
 		[ArgsMemberSwitch("acc"), Description("The accessibility to apply to the object (if supported)")]
 		public string Accessibility { get; set; }
 
+		[ArgsMemberSwitch("dtid"), Description("The document type id for the document (if supported)")]
+		public int? DocumentTypeId { get; set; }
+
 		[Required, ArgsMemberSwitch("u"), Description("The user name to use for login")]
 		public string UserName { get; set; }
 

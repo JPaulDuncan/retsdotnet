@@ -40,6 +40,7 @@ namespace LpsRetsClient.Transaction
 		public string ContentDescription { get; set; }
 		public string ContentLabel { get; set; }
 		public string FileName { get; set; }
+		public int? DocumentTypeId { get; set; }
 
 		public override void PrepareRequest(HttpWebRequest request)
 		{
@@ -64,6 +65,9 @@ namespace LpsRetsClient.Transaction
 
 			if (Type.Equals("Document", StringComparison.InvariantCultureIgnoreCase))
 				request.Headers.Add("X-FileName", FileName);
+
+			if (Type.Equals("Document", StringComparison.InvariantCultureIgnoreCase) && DocumentTypeId.HasValue)
+				request.Headers.Add("X-Document-Type-ID", DocumentTypeId.ToString());
 
 			base.PrepareRequest(request);
 		}

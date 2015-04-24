@@ -136,7 +136,8 @@ namespace LpsRetsClient
 													Accessibility = postObjectParams.Accessibility,
 													DelegateId = postObjectParams.DelegateId,
 													DelegateHash = postObjectParams.DelegateHash,
-													DelegatePassword = postObjectParams.DelegatePassword
+													DelegatePassword = postObjectParams.DelegatePassword,
+													DocumentTypeId = postObjectParams.DocumentTypeId,
 						                        };
 
 					response.Parse(request.Post(postObjectRequest));

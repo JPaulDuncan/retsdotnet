@@ -41,6 +41,7 @@ namespace LpsRetsClient.Http
 			var credentials = new CredentialCache {{methodUri, authMethod, networkCredential}};
 
 			var request = (HttpWebRequest)WebRequest.Create(methodUri);
+			request.PreAuthenticate = true;
 			request.Credentials = credentials;
 			request.UserAgent = sessionInfo.UserAgent;
 			request.Headers.Add("RETS-Version", sessionInfo.RetsVersion);
@@ -53,6 +54,20 @@ namespace LpsRetsClient.Http
 
 			foreach (var header in retsRequest.Headers)
 				request.Headers.Add(header.Key, header.Value);
+
+			// Handle Digest calculations here because PreAuthenticate doesn't work properly for digest
+			if (!string.IsNullOrWhiteSpace(sessionInfo.Authorization))
+			{
+				var digestUtility = new DigestUtility();
+				var newHeader = digestUtility.UpdateAuthorizationHeader(sessionInfo.Authorization, methodUri.AbsolutePath, sessionInfo.Password, request.Method);
+				if (!string.IsNullOrWhiteSpace(newHeader))
+					request.Headers.Add("Authorization", newHeader);
+			}
+
+			// Prepare the request after everything has been set up, but before we make the call
+			// so the request can be modified as needed for the transaction.
+			// NOTE: Set headers before streaming PostBody data
+			retsRequest.PrepareRequest(request);
 
 			byte[] rawPostData = retsRequest.PostBody;
 			if (rawPostData != null && rawPostData.Length > 0)
@@ -70,15 +85,15 @@ namespace LpsRetsClient.Http
 				request.ContentLength = 0;
 			}
 
-			// Prepare the request after everything has been set up, but before we make the call
-			// so the request can be modified as needed for the transaction.
-			retsRequest.PrepareRequest(request);
-			
+
 			HttpWebResponse response = null;
 			
 			try
 			{
 				response = (HttpWebResponse)request.GetResponse();
+
+				// Store the authorization header value for subsequent use
+				sessionInfo.Authorization = request.Headers.Get("Authorization");
 				
 				sessionInfo.Cookies = new CookieContainer();
 				foreach (Cookie cookie in response.Cookies)

@@ -38,6 +38,7 @@ namespace LpsRetsClient.Data
 		public string RetsVersion { get; private set; }
 		public string RetsRequestId { get; set; }
 		public AuthenticationMethod AuthMethod { get; private set; }
+		public string Authorization { get; set; }
 		
 		public CookieContainer Cookies { get; set; }
 

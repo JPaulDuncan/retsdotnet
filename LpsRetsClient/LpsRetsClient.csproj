@@ -70,6 +70,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RetsPostObjectParams.cs" />
     <Compile Include="Security\Crypto.cs" />
+    <Compile Include="Security\DigestUtility.cs" />
     <Compile Include="Transaction\IRetsRequest.cs" />
     <Compile Include="Transaction\RetsLoginRequest.cs" />
     <Compile Include="Transaction\RetsLogoutRequest.cs" />
